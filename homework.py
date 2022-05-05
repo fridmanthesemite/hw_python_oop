@@ -56,10 +56,10 @@ class Training:
         mean_speed = self.get_mean_speed()
         calories = self.get_spent_calories()
         return InfoMessage(type(self).__name__,
-                           self.duration,
-                           distance,
-                           mean_speed,
-                           calories)
+                                self.duration,
+                                distance,
+                                mean_speed,
+                                calories)
 
 
 class Running(Training):
@@ -121,6 +121,7 @@ class Swimming(Training):
         return ((self.get_mean_speed() + coeff_calorie_1)
                  * coeff_calorie_2 * self.weight)
 
+
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
     TrainCode = {
@@ -133,10 +134,12 @@ def read_package(workout_type: str, data: list) -> Training:
     else:
         raise ValueError('Отсутствует тип тренировки')
 
+
 def main(training: Training) -> None:
     """Главная функция."""
     info = Training.show_training_info(training)
     print(InfoMessage.get_message(info))
+
 
 if __name__ == '__main__':
     packages = [
