@@ -17,19 +17,18 @@ class InfoMessage:
         pass
 
     def get_message(self) -> str:
-        return (f"Тип тренировки: {self.training_type};"
+        return (f" Тип тренировки: {self.training_type};"
                 f" Длительность: {self.duration:.3f} ч.;"
                 f" Дистанция: {self.distance:.3f} км;"
                 f" Ср. скорость: {self.speed:.3f} км/ч;"
                 f" Потрачено ккал: {self.calories:.3f}.")
-
 
 class Training:
     """Базовый класс тренировки."""
     
     LEN_STEP = 0.65
     M_IN_KM = 1000
-    
+
     def __init__(self, 
                  action: int, 
                  duration: float, 
@@ -61,7 +60,6 @@ class Training:
                            mean_speed,
                            calories)
 
-
 class Running(Training):
     """Тренировка: бег."""
 
@@ -72,7 +70,6 @@ class Running(Training):
         return ((coeff_calorie_run_1 * self.get_mean_speed()
                 - coeff_calorie_run_2) * self.weight
                 / self.M_IN_KM * (self.duration * h_in_min))
-
 
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
@@ -94,7 +91,6 @@ class SportsWalking(Training):
         self.get_mean_speed()) // self.height) * 
         coeff_calorie_walk_2 * self.weight) * 
         (self.duration * h_in_min))
-
 
 class Swimming(Training):
     """Тренировка: плавание."""
@@ -121,7 +117,6 @@ class Swimming(Training):
         return ((self.get_mean_speed() + coeff_calorie_1)
                 * coeff_calorie_2 * self.weight)
 
-
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
     TrainCode = {
@@ -134,12 +129,10 @@ def read_package(workout_type: str, data: list) -> Training:
     else:
         raise ValueError('Отсутствует тип тренировки')
 
-
 def main(training: Training) -> None:
     """Главная функция."""
     info = Training.show_training_info(training)
     print(InfoMessage.get_message(info))
-
 
 if __name__ == '__main__':
     packages = [
@@ -151,4 +144,3 @@ if __name__ == '__main__':
     for workout_type, data in packages:
         training = read_package(workout_type, data)
         main(training)
-
