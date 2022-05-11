@@ -136,7 +136,7 @@ def read_package(workout_type: str, data: List[int]) -> Training:
     }
     if workout_type in train_code:
         return train_code.get(workout_type)(*data)
-        
+
     raise ValueError('Отсутствует тип тренировки')
 
 
